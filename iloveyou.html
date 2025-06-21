@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Я вас люблю 💖</title>
+    <style>
+        body {
+          margin: 0;
+          background: #fff0f5;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          font-family: 'Segoe UI', sans-serif;
+        }
+
+        h1 {
+          font-size: 3em;
+          color: #ff1493;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+          animation: colorShift 5s infinite alternate;
+          white-space: nowrap;
+          border-right: 2px solid #ff69b4;
+          overflow: hidden;
+        }
+
+        @keyframes colorShift {
+          0%   { color: #ff1493; }
+          25%  { color: #ff69b4; }
+          50%  { color: #ff85c1; }
+          75%  { color: #ff44aa; }
+          100% { color: #d02090; }
+        }
+
+        .heart {
+          position: absolute;
+          font-size: 2em;
+          color: #ff69b4;
+          animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+          0% {
+            transform: translateY(100vh);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100vh);
+            opacity: 0;
+          }
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="text"></h1>
+
+<script>
+    const text = "Я вас люблю 💖";
+    const h1 = document.getElementById("text");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        h1.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 150);
+      }
+    }
+
+    typeWriter();
+
+    // сердечки
+    function createHeart() {
+      const el = document.createElement("div");
+      el.className = "heart";
+      el.textContent = "💗";
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
